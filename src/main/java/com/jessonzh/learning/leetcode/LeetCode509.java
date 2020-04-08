@@ -1,6 +1,6 @@
 package com.jessonzh.learning.leetcode;
 
-public class NumWays {
+public class LeetCode509 {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.fib(5));

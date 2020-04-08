@@ -2,7 +2,7 @@ package com.jessonzh.learning.jvm;
 
 import java.util.WeakHashMap;
 
-public class WeakHashMapDemo {
+public class WeakHashMapTest {
     public static void main(String[] args) {
         WeakHashMap<Integer, String> map = new WeakHashMap<>();
         Integer key = 100;
