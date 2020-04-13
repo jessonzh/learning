@@ -1,4 +1,4 @@
-package com.jessonzh.learning.leetcode;
+package com.jessonzh.learning.algorithm.swordoffer;
 
 import java.util.Stack;
 

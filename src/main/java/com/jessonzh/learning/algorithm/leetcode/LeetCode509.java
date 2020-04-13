@@ -1,4 +1,4 @@
-package com.jessonzh.learning.leetcode;
+package com.jessonzh.learning.algorithm.leetcode;
 
 public class LeetCode509 {
     public static void main(String[] args) {

@@ -8,7 +8,7 @@ public class ThreadPoolExecutorDemo {
     public static void main(String[] args) {
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(5,
                 12,
-                1,
+                2,
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(7),
                 new ThreadPoolExecutor.AbortPolicy());
@@ -16,28 +16,17 @@ public class ThreadPoolExecutorDemo {
             poolExecutor.execute(new Thread(() -> {
                 // 线程操作
                 System.out.println(Thread.currentThread().getName());
-//                try {
-//                    TimeUnit.SECONDS.sleep(2);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }, "Thread-" + String.valueOf(i)));
         }
         try {
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        for (int i = 0; i < 30; i++) {
-            poolExecutor.execute(new Thread(() -> {
-                // 线程操作
-                System.out.println(Thread.currentThread().getName());
-//                try {
-//                    TimeUnit.SECONDS.sleep(2);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-            }, "Thread-" + String.valueOf(i)));
         }
 
         //终止线程池
