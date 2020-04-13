@@ -1,4 +1,4 @@
-package com.jessonzh.learning.concurrent.comsumer;
+package com.jessonzh.learning.concurrency.comsumer;
 
 public class Starter {
 

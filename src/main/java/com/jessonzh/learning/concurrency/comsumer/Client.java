@@ -1,4 +1,4 @@
-package com.jessonzh.learning.concurrent.comsumer;
+package com.jessonzh.learning.concurrency.comsumer;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

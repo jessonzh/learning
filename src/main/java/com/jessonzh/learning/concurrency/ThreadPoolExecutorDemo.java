@@ -1,4 +1,4 @@
-package com.jessonzh.learning.concurrent;
+package com.jessonzh.learning.concurrency;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

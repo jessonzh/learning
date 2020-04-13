@@ -1,4 +1,4 @@
-package com.jessonzh.learning.concurrent;
+package com.jessonzh.learning.concurrency;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
