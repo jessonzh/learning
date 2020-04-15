@@ -48,8 +48,8 @@ public class StringConstantPoolTest {
         System.out.println(s1_intern == s2);
 
         String s3 = s2 + s2; // 运行时产生了对象在堆内，s3为堆内对象引用
-        String s4 = "abcabc";
         String s3_intern = s3.intern(); // 常量池中存放的堆内的引用，返回的为堆内的引用
+        String s4 = "abcabc";
         System.out.println(s3 == s4);
         System.out.println(s3_intern == s4);
 

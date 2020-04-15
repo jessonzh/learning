@@ -2,6 +2,10 @@ package com.jessonzh.learning.concurrency.spinlock;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * 自定义的自旋锁
+ * 利用AtomicReference实现
+ */
 public class SpinLock {
     AtomicReference<Thread> lock = new AtomicReference<>();
 
