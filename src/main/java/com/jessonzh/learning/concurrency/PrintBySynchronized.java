@@ -1,4 +1,4 @@
-package com.jessonzh.learning.concurrent;
+package com.jessonzh.learning.concurrency;
 
 public class PrintBySynchronized {
 
