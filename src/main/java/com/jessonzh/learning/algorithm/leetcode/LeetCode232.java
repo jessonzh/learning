@@ -1,8 +1,8 @@
-package com.jessonzh.learning.algorithm.swordoffer;
+package com.jessonzh.learning.algorithm.leetcode;
 
 import java.util.Stack;
 
-public class LeetCodeTest {
+public class LeetCode232 {
     public static void main(String[] args) {
         CQueue obj = new CQueue();
         obj.appendTail(1);

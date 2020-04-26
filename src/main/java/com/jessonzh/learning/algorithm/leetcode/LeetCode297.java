@@ -4,16 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+public class LeetCode297 {
 
-public class Codec {
-
-    // Encodes a tree to a single string.
+    /**
+     * 思路：所有节点的value都加上"!"结尾，为空则加"#"符号来区分
+     */
     public String serialize(TreeNode root) {
         return rserialize(root, "");
     }
@@ -29,18 +24,30 @@ public class Codec {
         return str;
     }
 
-    // Decodes your encoded data to tree.
+    /**
+     * 思路：按照"!"分隔符来切分成数组
+     */
     public TreeNode deserialize(String data) {
-        String[] array = data.split("!");
-        List<String> list = new LinkedList<>(Arrays.asList(array));
+        List<String> list = new LinkedList<>(Arrays.asList(data.split("!")));
         return rdeserialize(list);
     }
 
     public TreeNode rdeserialize(List<String> list) {
         if (list.get(0).equals("#")) {
+            list.remove(0);
             return null;
         }
         TreeNode root = new TreeNode(Integer.parseInt(list.get(0)));
+        list.remove(0);
+        root.left = rdeserialize(list);
+        root.right = rdeserialize(list);
+        return root;
+    }
 
+    private static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
     }
 }

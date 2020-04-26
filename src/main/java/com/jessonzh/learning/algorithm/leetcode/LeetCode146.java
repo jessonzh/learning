@@ -1,11 +1,11 @@
-package com.jessonzh.learning.algorithm;
+package com.jessonzh.learning.algorithm.leetcode;
 
 import java.util.HashMap;
 
 /**
- *
+ * LRUCache
  */
-public class LRUCache {
+public class LeetCode146 {
     private class Node {
         Node prev;
         Node next;
@@ -25,7 +25,7 @@ public class LRUCache {
     private Node head = new Node(-1, -1);
     private Node tail = new Node(-1, -1);
 
-    public LRUCache(int capacity) {
+    public LeetCode146(int capacity) {
         this.capacity = capacity;
         tail.prev = head;
         head.next = tail;
