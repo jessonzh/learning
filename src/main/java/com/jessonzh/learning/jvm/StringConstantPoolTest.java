@@ -27,6 +27,7 @@ public class StringConstantPoolTest {
         // 如果使用new String()在堆内创建对象，和常量池没有关系，创建多个对象也不相同；
 
         // 任何字符串调用intern()方法，先看是否常量池中存在相同的字符串对象，常量池如果存在相同字符串的对象，如果存在就返回池内的对象引用
+
         // 然后再看是否存在相同字符串的堆内对象的引用，如果存在就返回的是堆内的对象引用
         // 都不存在的话，情况只可能就是运行期产生了一个在堆中的字符串对象，调用intern()方法，此时在常量池中保存对堆内String对象的引用即可，返回的也是堆内引用
         // 任何已创建字面量到常量池中产生对象的，这个时候再调用intern()，返回常量池中相同字符串对象的引用
@@ -63,5 +64,9 @@ public class StringConstantPoolTest {
 
         String t4 = new StringBuilder().append("open").append("jdk").toString();
         System.out.println(t4.intern() == t4);
+
+        String test = "";
+        test = null;
+        String sss = (String) test;
     }
 }

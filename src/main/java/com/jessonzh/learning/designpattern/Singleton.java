@@ -5,7 +5,6 @@ public class Singleton {
     private static volatile Singleton instance;
 
     private Singleton(){
-        System.out.println("only once");
     }
 
     public static Singleton getInstance() {
