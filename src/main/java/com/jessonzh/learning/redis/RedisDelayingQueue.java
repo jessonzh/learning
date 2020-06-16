@@ -31,7 +31,7 @@ public class RedisDelayingQueue<T> {
         taskItem.id = UUID.randomUUID().toString();
         taskItem.msg = msg;
         String string = JSON.toJSONString(taskItem);
-        jedis.zadd(queueKey, System.currentTimeMillis() + 1000, string);
+        jedis.zadd(queueKey, System.currentTimeMillis() + 5000, string);
     }
 
     public T loop() {
@@ -39,7 +39,6 @@ public class RedisDelayingQueue<T> {
             Set<String> stringSet = jedis.zrangeByScore(queueKey, 0, System.currentTimeMillis(), 0, 1);
             if (stringSet.isEmpty()) {
                 try {
-                    System.out.println(Thread.currentThread().getName());
                     TimeUnit.MICROSECONDS.sleep(500);
                 } catch (InterruptedException e) {
                     break;
@@ -56,22 +55,18 @@ public class RedisDelayingQueue<T> {
     }
 
     public static void main(String[] args) {
-        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        Jedis jedis = new Jedis("192.168.56.101", 6379);
         RedisDelayingQueue<String> delayingQueue = new RedisDelayingQueue<>(jedis, "redis-queue");
-        for (int i = 0; i < 5; i++) {
-            final int j = i;
-            new Thread(() -> {
-                // 线程操作
-                delayingQueue.delay("number -> " + j);
-            }, "Provider-" + String.valueOf(i)).start();
-        }
+        Thread provider = new Thread(() -> {
+            // 线程操作
+            delayingQueue.delay("number");
+        }, "Provider");
+        provider.start();
 
-        for (int i = 0; i < 5; i++) {
-            final int j = i;
-            new Thread(() -> {
-                // 线程操作
-                System.out.println("consume -> " + delayingQueue.loop());
-            }, "Provider-" + String.valueOf(i)).start();
-        }
+        Thread consumer = new Thread(() -> {
+            // 线程操作
+            System.out.println("consume -> " + delayingQueue.loop());
+        }, "Consumer");
+        consumer.start();
     }
 }
