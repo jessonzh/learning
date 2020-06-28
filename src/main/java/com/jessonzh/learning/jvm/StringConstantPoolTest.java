@@ -4,7 +4,7 @@ public class StringConstantPoolTest {
 
     public static void main(String[] args) {
         String str1 = "123"; // str1为常量池对象引用
-        String str2 = new String("123"); // str2为堆内对象引用，同时回去试图去常量池创建字面量的对象，但是已有"123"
+        String str2 = new String("123"); // str2为堆内对象引用，同时会去试图去常量池创建字面量的对象，但是已有"123"
         String str3 = str2.intern(); // str3为常量池内"123"对象的引用，也就是str1
         String str4 = str1.intern(); // str4为常量池内"123"对象的引用，也就是str1
         String str5 = "123"; // str5为常量池中"123"对象的引用，也就是str1
@@ -21,7 +21,7 @@ public class StringConstantPoolTest {
 
         // 在JDK7/8中，对于字符串字面量（包括常量表达式，常量表达式在编译时就会拼接成一个常量）
         // 先看常量池是否存在相同字符串对象，如果存在则返回池内对象的引用；
-        // 再看常量池是否存在相同字符串的堆内的引用，如果就返回堆内对象的引用；
+        // 再看常量池是否存在相同字符串的堆内的引用，如果存在就返回堆内对象的引用；
         // 如果都不存在，会创建String对象到字符串常量池，返回对这个对象的引用；
 
         // 如果使用new String()在堆内创建对象，和常量池没有关系，创建多个对象也不相同；
@@ -34,6 +34,8 @@ public class StringConstantPoolTest {
 
         // 要特别注意String s1 = new String("abc");这种创建类型，会先字面量"abc"创建常量池的对象，然后又在堆内创建一个"abc"的对象
 
+        // 字符串变量拼接的原理是StringBuilder
+        // 字符串常量拼接的原理是编译器优化
         // 如果是编译期不能确定的字符串（也就是运行期才能生成的字符串），在堆内创建对象，调用intern()方法会使得常量池中保存对堆内String对象的引用。
         // 而不会在常量池内再生成一个对象，之所以做这种改动，可能是考虑到字符串常量池已经移动到了堆中，因此没有必要在池内和池外各保留一个对象，这样节省空间。
 
@@ -48,11 +50,11 @@ public class StringConstantPoolTest {
         System.out.println(s1 == s2);
         System.out.println(s1_intern == s2);
 
-        String s3 = s2 + s2; // 运行时产生了对象在堆内，s3为堆内对象引用
+        String s3 = s2 + s2; // *** 运行时产生了对象在堆内，s3为堆内对象引用
         String s3_intern = s3.intern(); // 常量池中存放的堆内的引用，返回的为堆内的引用
         String s4 = "abcabc";
-        System.out.println(s3 == s4);
-        System.out.println(s3_intern == s4);
+        System.out.println("s3 == s4 : " + (s3 == s4));
+        System.out.println("s3_intern == s4 : " + (s3_intern == s4));
 
         System.out.println("=====================================");
 
