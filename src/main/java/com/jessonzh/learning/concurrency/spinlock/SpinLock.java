@@ -1,5 +1,7 @@
 package com.jessonzh.learning.concurrency.spinlock;
 
+import org.springframework.lang.Nullable;
+
 import java.util.concurrent.atomic.AtomicReference;
 
 /**

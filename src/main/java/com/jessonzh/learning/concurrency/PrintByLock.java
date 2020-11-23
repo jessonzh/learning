@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class PrintByLock {
     public static void main(String[] args) {
         ResourcesByLock resourcesByLock = new ResourcesByLock();
+        // 使用lambda表达式创建线程
         new Thread(() -> {
             for (int i = 1; i <= 26; i++) {
                 resourcesByLock.printOdd();
@@ -26,7 +27,7 @@ public class PrintByLock {
 }
 
 /**
- * 线程操作资源类
+ * 共享资源类
  */
 class ResourcesByLock {
     private int n = 1;
@@ -40,11 +41,15 @@ class ResourcesByLock {
     public void printOdd() {
         lock.lock();
         try {
+            // 判断
             while (flag != 1) {
                 condition1.await();
             }
+            // 干活
             System.out.print(n * 2 - 1);
+            // 改变标志
             flag = 2;
+            // 通知其他线程
             condition2.signal();
         } catch (Exception e) {
             e.printStackTrace();

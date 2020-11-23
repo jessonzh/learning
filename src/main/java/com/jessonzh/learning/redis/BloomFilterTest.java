@@ -11,7 +11,7 @@ public class BloomFilterTest {
         Config config = new Config();
         config.useSingleServer()
                 .setTimeout(1000000)
-                .setAddress("redis://192.168.56.101:6379");
+                .setAddress("redis://192.168.56.104:6379");
         RedissonClient redissonClient = Redisson.create(config);
         RBloomFilter<String> bloomFilter = redissonClient.getBloomFilter("user_tbl");
         bloomFilter.tryInit(100000L, 0.01d);
