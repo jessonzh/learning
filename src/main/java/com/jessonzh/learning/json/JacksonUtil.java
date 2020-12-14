@@ -1,6 +1,5 @@
 package com.jessonzh.learning.json;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vip.vjtools.vjkit.mapper.JsonMapper;
 
 public class JacksonUtil {
