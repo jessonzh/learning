@@ -1,9 +1,8 @@
 package com.jessonzh.learning.redis;
 
 import lombok.extern.slf4j.Slf4j;
-import redis.clients.jedis.Jedis;
-
-import java.util.Objects;
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
 
 /**
  * HyperLogLog测试
@@ -13,7 +12,8 @@ import java.util.Objects;
 public class HyperLogLogTest {
 
     public static void main(String[] args) {
-        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        HostAndPort hostAndPort = new HostAndPort("192.168.1.128", 6379);
+        JedisCluster jedis = new JedisCluster(hostAndPort);
         log.info("start pfadd");
         for (int i = 0; i < 100000; i++) {
             String str = "user" + i;
