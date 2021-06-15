@@ -2,6 +2,7 @@ package com.jessonzh.learning.concurrency;
 
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.LockSupport;
 
 public class WaitingRejectHandler implements RejectedExecutionHandler {
 
@@ -22,8 +23,19 @@ public class WaitingRejectHandler implements RejectedExecutionHandler {
 
         submitRunnableInfo.incrementRejectTimes();
 
+        if (submitRunnableInfo.getRejectTimes() > 100) {
+            throw new RuntimeException("Thread pool is full");
+        }
 
-
+        while (!executor.isShutdown()) {
+            LockSupport.parkNanos(100L * submitRunnableInfo.getRejectTimes());
+            if (executor.getActiveCount() < executor.getMaximumPoolSize() * 0.9) {
+                executor.execute(r);
+                return;
+            } else {
+                LockSupport.parkNanos(100000000L * submitRunnableInfo.getRejectTimes());
+            }
+        }
     }
 
     private boolean isSameTask(SubmitRunnableInfo submitRunnableInfo, Runnable r, ThreadPoolExecutor executor) {

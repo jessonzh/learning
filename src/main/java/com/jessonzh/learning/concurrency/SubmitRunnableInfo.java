@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SubmitRunnableInfo implements Serializable {
 
-    private AtomicInteger rejectTimes;
+    private Integer rejectTimes;
 
     private Runnable runnable;
 
@@ -15,15 +15,15 @@ public class SubmitRunnableInfo implements Serializable {
     public SubmitRunnableInfo(Runnable r, ThreadPoolExecutor pool) {
         this.runnable = r;
         this.pool = pool;
-        this.rejectTimes = new AtomicInteger(0);
+        this.rejectTimes = 0;
     }
 
-    public AtomicInteger getRejectTimes() {
+    public Integer getRejectTimes() {
         return rejectTimes;
     }
 
     public void incrementRejectTimes() {
-        rejectTimes.incrementAndGet();
+        rejectTimes++;
     }
 
     public Runnable getRunnable() {
